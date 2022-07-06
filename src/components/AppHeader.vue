@@ -86,38 +86,38 @@ onMounted(async () => {
 .header {
   padding: 0 20px 18px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
 
-.header__wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  max-width: 1312px;
-  margin: 26px auto 0;
+    max-width: 1312px;
+    margin: 26px auto 0;
+  }
+
+  &__nav_list {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__nav_btn {
+    background-color: transparent;
+    border: none;
+    height: 24px;
+    width: 24px;
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
 
-.logo__title {
-  font-weight: 700;
-  font-size: 2.25rem;
-  line-height: 2.25rem;
-}
-
-.header__nav_list {
-  display: flex;
-  gap: 2rem;
-}
-
-.header__nav_btn {
-  background-color: transparent;
-  border: none;
-  height: 24px;
-  width: 24px;
+  &__title {
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+  }
 }
 </style>
