@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import axios from "axios";
 import type { NavItemType } from "@/types/NavItem";
-import NavItem from "./NavItem.vue";
 
+const path = useRoute();
 const routes = ref<NavItemType[]>([]);
 const addSlish = (route: string) => `/categories/${route.replace(" ", "%20")}`;
 
@@ -38,9 +39,15 @@ onMounted(async () => {
 
       <nav class="header__nav">
         <ul class="header__nav_list">
-          <NavItem v-for="route in routes" :key="route.url" :url="route.url">
+          <RouterLink
+            v-for="route in routes"
+            :key="route.url"
+            :to="route.url"
+            class="header__nav_item"
+            :class="{ active: path.fullPath === route.url }"
+          >
             {{ route.text }}
-          </NavItem>
+          </RouterLink>
         </ul>
       </nav>
 
@@ -107,6 +114,22 @@ onMounted(async () => {
     height: 24px;
     width: 24px;
   }
+
+  &__nav_item {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    padding-bottom: 6px;
+
+    cursor: pointer;
+    transition: all 0.2s linear;
+  }
+
+  .active {
+    padding-bottom: 3px;
+    border-bottom: 3px solid #000000;
+  }
 }
 
 .logo {
@@ -115,7 +138,7 @@ onMounted(async () => {
   gap: 0.5rem;
 
   &__title {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 2.25rem;
     line-height: 2.25rem;
   }
