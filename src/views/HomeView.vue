@@ -9,8 +9,16 @@ const products = ref<ProductType[]>([]);
 const store = useProductsStore();
 const route = useRoute();
 
-watch(route, () => store.setCategory(route.query.category as string));
-onMounted(() => store.setCategory(route.query.category as string));
+watch(route, () => {
+  store.setCategory(route.query.category as string);
+  store.getProducts();
+});
+onMounted(async () => {
+  store.setCategory(route.query.category as string);
+  await store.getProducts();
+  store.getRating();
+  store.getCount();
+});
 </script>
 
 <template>

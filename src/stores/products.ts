@@ -31,13 +31,10 @@ export const useProductsStore = defineStore({
 
     async getProducts() {
       this.products = await getProducts(this.sort, this.category);
-      this.getRating();
-      this.getCount();
     },
 
     setCategory(value: string) {
       this.category = value;
-      this.getProducts();
     },
 
     setRate(value: number[]) {
