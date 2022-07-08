@@ -14,12 +14,6 @@ const router = createRouter({
       // add shoping card
       component: () => import("@/views/AboutView.vue"),
     },
-    {
-      path: "/categories/:categoryId",
-      name: "category",
-      // add shoping card
-      component: () => import("@/views/AboutView.vue"),
-    },
   ],
 });
 
