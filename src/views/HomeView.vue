@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useProductsStore } from "@/stores/sort";
+import { onMounted, ref, watch } from "vue";
+import { useProductsStore } from "@/stores/products";
 import type { ProductType } from "@/types/Product";
 import ProductList from "../components/ProductList.vue";
+import { useRoute } from "vue-router";
 
 const products = ref<ProductType[]>([]);
 const store = useProductsStore();
+const route = useRoute();
 
-onMounted(() => store.getProducts());
+watch(route, () => store.setCategory(route.query.category as string));
+onMounted(() => store.setCategory(route.query.category as string));
 </script>
 
 <template>
