@@ -3,6 +3,7 @@ import { useProductsStore } from "@/stores/products";
 import ProductCard from "./ProductCard.vue";
 
 import MainAside from "./MainAside.vue";
+import AppFooter from "./AppFooter.vue";
 
 const store = useProductsStore();
 
@@ -35,6 +36,7 @@ defineProps({
           :key="product.id"
         />
       </TransitionGroup>
+      <AppFooter />
     </section>
   </main>
 </template>
