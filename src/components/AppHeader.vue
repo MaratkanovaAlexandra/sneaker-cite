@@ -1,25 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
-import axios from "axios";
+import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
 
-const path = useRoute();
 const routes = ref<NavItemType[]>([]);
-const addSlish = (route: string) => `/categories/${route.replace(" ", "%20")}`;
+const route = useRoute();
 
 onMounted(async () => {
-  const result = await axios.get(
-    "https://fakestoreapi.com/products/categories"
-  );
-
-  routes.value = [
-    { url: "/", text: "New arrivals" },
-    ...result.data.map((i: string) => ({
-      url: addSlish(i),
-      text: i,
-    })),
-  ];
+  routes.value = await getCategories();
 });
 </script>
 
@@ -40,13 +29,13 @@ onMounted(async () => {
       <nav class="header__nav">
         <ul class="header__nav_list">
           <RouterLink
-            v-for="route in routes"
-            :key="route.url"
-            :to="route.url"
+            v-for="routeItem in routes"
+            :key="routeItem.url"
+            :to="routeItem.url"
             class="header__nav_item"
-            :class="{ active: path.fullPath === route.url }"
+            :class="routeItem.url === route.fullPath ? 'active' : ''"
           >
-            {{ route.text }}
+            {{ routeItem.text }}
           </RouterLink>
         </ul>
       </nav>
@@ -124,14 +113,16 @@ onMounted(async () => {
 
     cursor: pointer;
     transition: all 0.2s linear;
+    color: #000000;
   }
-
-  .active {
-    padding-bottom: 3px;
-    border-bottom: 3px solid #000000;
+  &__nav_item:active {
+    color: #000000;
   }
 }
-
+.active {
+  padding-bottom: 3px;
+  border-bottom: 3px solid #000000;
+}
 .logo {
   display: flex;
   align-items: center;
