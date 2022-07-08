@@ -24,9 +24,9 @@ export const useProductsStore = defineStore({
   },
 
   actions: {
-    toggleSort() {
+    async toggleSort() {
       this.sort = this.sort === "asc" ? "desc" : "asc";
-      this.getProducts();
+      this.products = await getProducts(this.sort, this.category);
     },
 
     async getProducts() {
