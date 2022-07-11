@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
 
 const routes = ref<NavItemType[]>([]);
 const route = useRoute();
+const router = useRouter();
 
 onMounted(async () => {
   routes.value = await getCategories();
@@ -15,7 +16,7 @@ onMounted(async () => {
 <template>
   <header class="header">
     <div class="header__wrapper">
-      <div class="logo">
+      <div class="logo" @click="router.push('/')">
         <img
           src="@/assets/icons/Logo.svg"
           alt="Sneaker City logo"
@@ -127,6 +128,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 
   &__title {
     font-weight: 600;

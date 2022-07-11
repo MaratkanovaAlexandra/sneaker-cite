@@ -3,6 +3,7 @@ import { useProductsStore } from "@/stores/products";
 import ProductCard from "./ProductCard.vue";
 
 import MainAside from "./MainAside.vue";
+
 import AppFooter from "./AppFooter.vue";
 import AppLoader from "./AppLoader.vue";
 
