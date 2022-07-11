@@ -46,25 +46,5 @@ export const useProductsStore = defineStore({
       this.count.min = value[0];
       this.count.max = value[1];
     },
-
-    getRating() {
-      this.rate.max = Math.ceil(
-        Math.max(...this.products.map((product) => product.rating.rate))
-      );
-
-      this.rate.min = Math.floor(
-        Math.min(...this.products.map((product) => product.rating.rate))
-      );
-    },
-
-    getCount() {
-      this.count.max = Math.ceil(
-        Math.max(...this.products.map((product) => product.rating.count))
-      );
-
-      this.count.min = Math.floor(
-        Math.min(...this.products.map((product) => product.rating.count))
-      );
-    },
   },
 });

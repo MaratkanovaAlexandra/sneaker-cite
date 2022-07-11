@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { useProductsStore } from "@/stores/products";
 import Slider from "@vueform/slider";
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const store = useProductsStore();
-const rateValue = ref([store.rate.min, store.rate.max]);
-const countValue = ref([store.count.min, store.count.max]);
 
-store.$subscribe(() => {
-  rateValue.value = [store.rate.min, store.rate.max];
-  countValue.value = [store.count.min, store.count.max];
-});
+const { rate, count } = storeToRefs(store);
+const { setRate, setCount } = store;
+
+const rateValue = [rate.value.min, rate.value.max];
+const countValue = [count.value.min, count.value.max];
 </script>
 
 <template>
@@ -24,12 +23,12 @@ store.$subscribe(() => {
           :max="5"
           class="aside__slider"
           :tooltips="false"
-          @update="store.setRate(rateValue)"
+          @update="setRate(rateValue)"
         />
         <div class="aside__output">
-          <p>{{ store.rate.min }}</p>
+          <p>{{ rate.min }}</p>
           /
-          <p>{{ store.rate.max }}</p>
+          <p>{{ rate.max }}</p>
         </div>
       </div>
 
@@ -41,12 +40,12 @@ store.$subscribe(() => {
           :max="1000"
           class="aside__slider"
           :tooltips="false"
-          @update="store.setCount(countValue)"
+          @update="setCount(countValue)"
         />
         <div class="aside__output">
-          <p>{{ store.count.min }}</p>
+          <p>{{ count.min }}</p>
           /
-          <p>{{ store.count.max }}</p>
+          <p>{{ count.max }}</p>
         </div>
       </div>
     </div>
