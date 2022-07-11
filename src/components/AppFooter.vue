@@ -1,8 +1,24 @@
 <script setup lang="ts"></script>
 
 <template>
-  <footer>
-    <div class="footer__wrapper"></div>
+  <footer class="footer">
+    <div class="footer__wrapper">
+      <div class="contacts">
+        <ul>
+          <li class="contacts__links">
+            <p>Don't missout on once-in-a-while-deals:</p>
+            <a href="" class="contacts__icon twitter"></a>
+            <a href="" class="contacts__icon instagram"></a>
+            <a href="" class="contacts__icon facebook"></a>
+          </li>
+          <li class="contacts__links">
+            <p>Support line:</p>
+            <a href="tel:+250 788 467 808">+250 788 467 808</a>
+          </li>
+        </ul>
+      </div>
+      <p class="footer_copyright">Copyright 2021 © Sneaker City ltd</p>
+    </div>
   </footer>
 </template>
 
@@ -13,5 +29,45 @@
   line-height: 24px;
 
   color: rgba(0, 0, 0, 0.65);
+  padding: 0 64px;
+
+  &__wrapper {
+    padding: 32px 0 64px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .contacts {
+    &__links {
+      display: flex;
+      gap: 12px;
+    }
+
+    &__icon {
+      display: block;
+      width: 32px;
+      height: 32px;
+
+      background-color: rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.facebook {
+  background-image: url(@/assets/icons/Facebook.svg);
+}
+
+.instagram {
+  background-image: url(@/assets/icons/Instagram.svg);
+}
+
+.twitter {
+  background-image: url(@/assets/icons/Twitter.svg);
 }
 </style>
