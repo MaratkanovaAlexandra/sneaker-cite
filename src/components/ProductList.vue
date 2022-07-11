@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useProductsStore } from "@/stores/sort";
+import { useProductsStore } from "@/stores/products";
 import ProductCard from "./ProductCard.vue";
-import Slider from "@vueform/slider";
 
-import RateInput from "@/components/Inputs/RateInput.vue";
-import { ref } from "vue";
+import MainAside from "./MainAside.vue";
 
 const store = useProductsStore();
 
@@ -14,12 +12,11 @@ defineProps({
     required: true,
   },
 });
-
-const value = ref(20);
 </script>
 
 <template>
   <main class="main">
+    <MainAside />
     <section class="progucts">
       <h2 class="progucts__title">{{ title }}</h2>
 
@@ -34,7 +31,7 @@ const value = ref(20);
       <TransitionGroup class="progucts__wrapper" tag="div" name="progucts">
         <ProductCard
           :product="product"
-          v-for="product in store.products"
+          v-for="product in store.filterProducts"
           :key="product.id"
         />
       </TransitionGroup>
@@ -85,14 +82,6 @@ const value = ref(20);
   .rotate {
     transform: rotate(540deg);
   }
-}
-
-.aside {
-  width: 334px;
-  /* padding-left: 32px; */
-  height: 100em;
-  background-color: rgba(94, 94, 94, 0.301);
-  border-radius: 10px;
 }
 
 .progucts-move,
