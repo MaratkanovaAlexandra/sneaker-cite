@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
@@ -7,6 +7,9 @@ import type { NavItemType } from "@/types/NavItem";
 const routes = ref<NavItemType[]>([]);
 const route = useRoute();
 const router = useRouter();
+const showHeader = ref(true);
+
+watch(route, () => (showHeader.value = route.path !== "/product"));
 
 onMounted(async () => {
   routes.value = await getCategories();
@@ -14,7 +17,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" v-if="showHeader">
     <div class="header__wrapper">
       <div class="logo" @click="router.push('/')">
         <img
