@@ -7,9 +7,9 @@
         <ul>
           <li class="contacts__links">
             <p>Don't missout on once-in-a-while-deals:</p>
-            <a href="" class="contacts__icon twitter"></a>
-            <a href="" class="contacts__icon instagram"></a>
-            <a href="" class="contacts__icon facebook"></a>
+            <a href="#" class="contacts__icon twitter"></a>
+            <a href="#" class="contacts__icon instagram"></a>
+            <a href="#" class="contacts__icon facebook"></a>
           </li>
           <li class="contacts__links">
             <p>Support line:</p>
