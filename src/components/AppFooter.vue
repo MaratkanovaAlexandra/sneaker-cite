@@ -17,7 +17,7 @@
           </li>
         </ul>
       </div>
-      <p class="footer_copyright">Copyright 2021 © Sneaker City ltd</p>
+      <p class="footer__copyright">Copyright 2021 © Sneaker City ltd</p>
     </div>
   </footer>
 </template>
@@ -40,22 +40,33 @@
     justify-content: space-between;
   }
 
-  .contacts {
-    &__links {
-      display: flex;
-      gap: 12px;
-    }
+  &__copyright {
+    font-size: 14px;
+    line-height: 18px;
+    min-width: max-content;
+  }
+}
+.contacts {
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 120px;
+  }
 
-    &__icon {
-      display: block;
-      width: 32px;
-      height: 32px;
+  &__links {
+    display: flex;
+    gap: 12px;
+  }
 
-      background-color: rgba(0, 0, 0, 0.04);
-      border-radius: 8px;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+  &__icon {
+    display: block;
+    width: 32px;
+    height: 32px;
+
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
@@ -69,5 +80,23 @@
 
 .twitter {
   background-image: url(@/assets/icons/Twitter.svg);
+}
+
+@media (max-width: 1109px) {
+  .footer {
+    &__wrapper {
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+    }
+  }
+
+  .contacts {
+    ul {
+      gap: 14px;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }
 </style>
