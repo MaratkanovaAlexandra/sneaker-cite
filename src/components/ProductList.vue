@@ -34,7 +34,7 @@ defineProps({
         class="progucts__wrapper"
         v-if="!store.isLoading"
         tag="div"
-        name="progucts"
+        name="products"
       >
         <ProductCard
           :product="product"
