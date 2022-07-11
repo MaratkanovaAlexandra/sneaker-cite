@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ProductType } from "@/types/Product";
+import { useRouter } from "vue-router";
 
 defineProps({
   product: {
@@ -7,13 +8,18 @@ defineProps({
     required: true,
   },
 });
+
+const router = useRouter();
 </script>
 
 <template>
-  <div class="card">
+  <div
+    class="card"
+    @click="router.push({ path: '/product', query: { productId: product.id } })"
+  >
     <img :src="product.image" :alt="product.title" />
     <h3 class="card__title">{{ product.title }}</h3>
-    <h4 class="card__price">{{ product.price }}</h4>
+    <h4 class="card__price">$ {{ product.price }}</h4>
   </div>
 </template>
 
