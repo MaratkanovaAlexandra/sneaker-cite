@@ -27,6 +27,12 @@ const router = useRouter();
 .card {
   width: 310px;
   min-height: 414px;
+  transition: transform 0.5s linear;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   & img {
     height: 308px;
