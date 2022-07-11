@@ -9,6 +9,7 @@ import AppLoader from "./AppLoader.vue";
 import ProductDetails from "./ProductDetails.vue";
 import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const store = useProductsStore();
 
@@ -18,6 +19,9 @@ defineProps({
     required: true,
   },
 });
+
+const { isRotating, filterProducts } = storeToRefs(store);
+const { toggleSort } = store;
 
 const chosen = ref<ProductType>({
   id: 0,
@@ -50,8 +54,8 @@ const closeTeleport = () => {
 
       <button
         class="progucts__sort"
-        :class="{ rotate: store.isRotating }"
-        @click="store.toggleSort()"
+        :class="{ rotate: isRotating }"
+        @click="toggleSort()"
       >
         <img src="@/assets/icons/Arrow.svg" alt="Sort" width="24" height="24" />
       </button>
@@ -59,7 +63,7 @@ const closeTeleport = () => {
       <TransitionGroup class="progucts__wrapper" tag="div" name="products">
         <ProductCard
           :product="product"
-          v-for="product in store.filterProducts"
+          v-for="product in filterProducts"
           :key="product.id"
           @click="openTeleport(product)"
         />

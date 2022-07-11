@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useProductsStore } from "@/stores/products";
+import { storeToRefs } from "pinia";
 
 const store = useProductsStore();
+const { isLoading } = storeToRefs(store);
 </script>
 
 <template>
-  <div v-if="store.isLoading" class="loader">
+  <div v-if="isLoading" class="loader">
     <img src="@/assets/icons/Loader.gif" alt="Loading..." />
   </div>
 </template>
