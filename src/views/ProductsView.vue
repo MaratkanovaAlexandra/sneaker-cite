@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 import { useProductsStore } from "@/stores/products";
-import type { ProductType } from "@/types/Product";
 import ProductList from "@/components/ProductList.vue";
 import { useRoute } from "vue-router";
 
-const products = ref<ProductType[]>([]);
 const store = useProductsStore();
 const route = useRoute();
 
@@ -20,5 +18,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <ProductList :title="`The new arrivals`" :products="products" />
+  <ProductList :title="`The new arrivals`" />
 </template>

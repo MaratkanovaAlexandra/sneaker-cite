@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
@@ -28,7 +28,7 @@ onMounted(async () => {
       </div>
 
       <nav class="header__nav">
-        <TransitionGroup tag="ul" class="header__nav_list" name="categories">
+        <TransitionGroup tag="ul" class="header__nav_list" name="category">
           <RouterLink
             v-for="routeItem in routes"
             :key="routeItem.url"
@@ -136,19 +136,19 @@ onMounted(async () => {
     line-height: 2.25rem;
   }
 
-  .categories-move,
-  .categories-enter-active,
-  .categories-leave-active {
+  .category-move,
+  .category-enter-active,
+  .category-leave-active {
     transition: all 0.2s ease;
   }
 
-  .categories-enter-from,
-  .categories-leave-to {
+  .category-enter-from,
+  .category-leave-to {
     opacity: 0;
     transform: translateY(-20px);
   }
 
-  .categories-leave-active {
+  .category-leave-active {
     position: absolute;
   }
 }

@@ -34,3 +34,11 @@ export const getCategories = async (): Promise<
     })),
   ];
 };
+
+export const getProduct = async (productId: number): Promise<ProductType> => {
+  const result = await axios.get(
+    `https://fakestoreapi.com/products/${productId}`
+  );
+
+  return result.data;
+};

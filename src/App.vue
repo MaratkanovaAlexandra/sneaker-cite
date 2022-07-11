@@ -6,6 +6,7 @@ import AppHeader from "./components/AppHeader.vue";
 <template>
   <AppHeader />
   <RouterView />
+  <div id="modals"></div>
 </template>
 
 <style lang="scss">

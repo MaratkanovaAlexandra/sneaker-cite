@@ -40,8 +40,8 @@ const router = useRouter();
   font-weight: 700;
 
   color: #fff;
-  background-color: #ff2e68;
-  border: 1px solid #ff2e68;
+  background-color: #d90429;
+  border: 1px solid #d90429;
   border-radius: 100vmax;
 
   animation: 2s ripple infinite;
