@@ -22,6 +22,7 @@ import AppHeader from "./components/AppHeader.vue";
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul {

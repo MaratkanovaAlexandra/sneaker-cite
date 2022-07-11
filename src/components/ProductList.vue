@@ -52,8 +52,6 @@ defineProps({
   position: relative;
   width: 76.8%;
 
-  margin-bottom: 92px;
-
   &__title {
     padding: 0 64px;
     font-weight: 700;
@@ -68,6 +66,7 @@ defineProps({
     width: 100%;
     gap: 64px 24px;
     flex-wrap: wrap;
+    margin-bottom: 92px;
   }
 
   &__sort {
