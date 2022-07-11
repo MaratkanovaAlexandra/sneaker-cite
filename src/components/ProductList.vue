@@ -30,13 +30,19 @@ defineProps({
         <img src="@/assets/icons/Arrow.svg" alt="Sort" width="24" height="24" />
       </button>
 
-      <TransitionGroup class="progucts__wrapper" tag="div" name="progucts">
+      <TransitionGroup
+        class="progucts__wrapper"
+        v-if="!store.isLoading"
+        tag="div"
+        name="progucts"
+      >
         <ProductCard
           :product="product"
           v-for="product in store.filterProducts"
           :key="product.id"
         />
       </TransitionGroup>
+      <div v-else class="loading"></div>
       <AppFooter />
     </section>
 
@@ -86,6 +92,11 @@ defineProps({
   .rotate {
     transform: rotate(540deg);
   }
+}
+
+.loading {
+  height: calc(100vh - 360px);
+  width: 100%;
 }
 
 .progucts-move,
