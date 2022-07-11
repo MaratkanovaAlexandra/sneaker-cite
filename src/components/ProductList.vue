@@ -6,6 +6,9 @@ import MainAside from "./MainAside.vue";
 
 import AppFooter from "./AppFooter.vue";
 import AppLoader from "./AppLoader.vue";
+import ProductDetails from "./ProductDetails.vue";
+import type { ProductType } from "@/types/Product";
+import { ref } from "vue";
 
 const store = useProductsStore();
 
@@ -15,6 +18,28 @@ defineProps({
     required: true,
   },
 });
+
+const chosen = ref<ProductType>({
+  id: 0,
+  title: "",
+  price: "",
+  category: "",
+  description: "",
+  image: "",
+  rating: { rate: 0, count: 0 },
+});
+const open = ref(false);
+
+const openTeleport = (product: ProductType) => {
+  chosen.value = product;
+  open.value = true;
+  document.documentElement.style.overflow = "hidden";
+};
+
+const closeTeleport = () => {
+  open.value = false;
+  document.documentElement.style.overflow = "auto";
+};
 </script>
 
 <template>
@@ -31,19 +56,23 @@ defineProps({
         <img src="@/assets/icons/Arrow.svg" alt="Sort" width="24" height="24" />
       </button>
 
-      <TransitionGroup
-        class="progucts__wrapper"
-        v-if="!store.isLoading"
-        tag="div"
-        name="products"
-      >
+      <TransitionGroup class="progucts__wrapper" tag="div" name="products">
         <ProductCard
           :product="product"
           v-for="product in store.filterProducts"
           :key="product.id"
+          @click="openTeleport(product)"
         />
       </TransitionGroup>
-      <div v-else class="loading"></div>
+
+      <Teleport to="#modals">
+        <ProductDetails
+          :product="(chosen as ProductType)"
+          :show="open"
+          @close="closeTeleport"
+        />
+      </Teleport>
+
       <AppFooter />
     </section>
 
@@ -58,6 +87,7 @@ defineProps({
   gap: 20px;
   max-width: 1440px;
 }
+
 .progucts {
   position: relative;
   width: 76.8%;
@@ -77,6 +107,7 @@ defineProps({
     gap: 64px 24px;
     flex-wrap: wrap;
     margin-bottom: 92px;
+    min-height: calc(100vh - 460px);
   }
 
   &__sort {
@@ -95,24 +126,19 @@ defineProps({
   }
 }
 
-.loading {
-  height: calc(100vh - 360px);
-  width: 100%;
-}
-
-.progucts-move,
-.progucts-enter-active,
-.progucts-leave-active {
+.products-move,
+.products-enter-active,
+.products-leave-active {
   transition: all 0.5s ease;
 }
 
-.progucts-enter-from,
-.progucts-leave-to {
+.products-enter-from,
+.products-leave-to {
   opacity: 0;
   transform: translateX(30px);
 }
 
-.progucts-leave-active {
+.products-leave-active {
   position: absolute;
 }
 </style>

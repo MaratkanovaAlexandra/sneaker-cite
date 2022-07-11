@@ -3,6 +3,10 @@ import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 
 const props = defineProps({
+  show: {
+    type: Boolean,
+    required: true,
+  },
   product: {
     type: Object as () => ProductType,
     required: true,
@@ -23,49 +27,64 @@ const plusAmount = () => {
 </script>
 
 <template>
-  <div class="main">
-    <div class="main__title">
-      <h1 class="main__name">{{ props.product.title }}</h1>
-      <h3 class="main__price">$ {{ props.product.price }}</h3>
-    </div>
-    <div class="main__image_warpper">
-      <img class="main__image" :src="props.product.image" />
-    </div>
-    <div class="main__info">
-      <div class="main__description">
-        <h4>Description:</h4>
-        <p>
-          {{ props.product.description }}
-        </p>
-      </div>
-
-      <form class="add_to_shopping_card" @submit.prevent>
-        <div class="add_to_shopping_card__amount">
-          <input
-            type="button"
-            class="add_to_shopping_card__amount_btn minus"
-            @click="minusAmount"
-          />
-          <output class="add_to_shopping_card__amount_output">{{
-            amout
-          }}</output>
-          <input
-            type="button"
-            class="add_to_shopping_card__amount_btn plus"
-            @click="plusAmount"
-          />
+  <Transition name="modal">
+    <div class="teleport" v-if="show" @click.self="$emit('close')">
+      <div class="main">
+        <div class="main__title">
+          <h1 class="main__name">{{ props.product.title }}</h1>
+          <h3 class="main__price">$ {{ props.product.price }}</h3>
         </div>
-        <input
-          type="submit"
-          class="add_to_shopping_card__submit"
-          value="Add to cart"
-        />
-      </form>
+        <div class="main__image_warpper">
+          <img class="main__image" :src="props.product.image" />
+        </div>
+        <div class="main__info">
+          <div class="main__description">
+            <h4>Description:</h4>
+            <p>
+              {{ props.product.description }}
+            </p>
+          </div>
+
+          <form class="add_to_shopping_card" @submit.prevent>
+            <div class="add_to_shopping_card__amount">
+              <input
+                type="button"
+                class="add_to_shopping_card__amount_btn minus"
+                @click="minusAmount"
+              />
+              <output class="add_to_shopping_card__amount_output">{{
+                amout
+              }}</output>
+              <input
+                type="button"
+                class="add_to_shopping_card__amount_btn plus"
+                @click="plusAmount"
+              />
+            </div>
+            <input
+              type="submit"
+              class="add_to_shopping_card__submit"
+              value="Add to cart"
+            />
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
+.teleport {
+  position: fixed;
+  inset: 0 0 0 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-content: center;
+
+  background-color: rgba(196, 196, 196, 0.3);
+  transition: opacity 0.3s ease;
+}
 .main {
   position: relative;
   padding: 40px;
@@ -77,6 +96,7 @@ const plusAmount = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 
   &__image_warpper {
     height: 100%;
@@ -191,5 +211,19 @@ const plusAmount = () => {
     color: #fff;
     font-weight: 700;
   }
+}
+
+.modal-enter-from {
+  opacity: 0;
+}
+
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .main,
+.modal-leave-to .main {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>
