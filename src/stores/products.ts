@@ -3,7 +3,7 @@ import { getProducts } from "@/api";
 import { defineStore } from "pinia";
 
 export const useProductsStore = defineStore({
-  id: "sort",
+  id: "products",
   state: () => ({
     products: [] as ProductType[],
     sort: "asc",

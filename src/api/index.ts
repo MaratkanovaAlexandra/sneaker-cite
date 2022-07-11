@@ -27,9 +27,9 @@ export const getCategories = async (): Promise<
   );
 
   return [
-    { url: "/", text: "New arrivals" },
+    { url: "/products", text: "New arrivals" },
     ...result.data.map((i: string) => ({
-      url: `/?category=${i.replace(" ", "%20").replace("'", "%27")}`,
+      url: `/products?category=${i.replace(" ", "%20").replace("'", "%27")}`,
       text: i,
     })),
   ];
