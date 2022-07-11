@@ -68,6 +68,7 @@ const countValue = [count.value.min, count.value.max];
     )
     0 100% 0 0;
   border-top: none;
+  z-index: 0;
 
   &__slider {
     --slider-bg: #00000026;

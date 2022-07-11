@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ProductType } from "@/types/Product";
-import { useRouter } from "vue-router";
+import { ref } from "vue";
+import ProductDetails from "./ProductDetails.vue";
 
 defineProps({
   product: {
@@ -9,17 +10,23 @@ defineProps({
   },
 });
 
-const router = useRouter();
+const open = ref(false);
+const toggelDelails = () => {
+  open.value = !open.value;
+  document.documentElement.style.overflow = open.value ? "hidden" : "auto";
+};
 </script>
 
 <template>
-  <div
-    class="card"
-    @click="router.push({ path: '/product', query: { productId: product.id } })"
-  >
-    <img :src="product.image" :alt="product.title" />
-    <h3 class="card__title">{{ product.title }}</h3>
-    <h4 class="card__price">$ {{ product.price }}</h4>
+  <div class="card">
+    <div @click="toggelDelails">
+      <img :src="product.image" :alt="product.title" />
+      <h3 class="card__title">{{ product.title }}</h3>
+      <h4 class="card__price">$ {{ product.price }}</h4>
+    </div>
+    <dialog @click.self="toggelDelails" class="card__details" :open="open">
+      <ProductDetails :product="product" />
+    </dialog>
   </div>
 </template>
 
@@ -30,9 +37,25 @@ const router = useRouter();
   transition: transform 0.5s linear;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.05);
+  &__details {
+    position: fixed;
+    inset: 0 0 0 0;
+    height: 100vh;
+    width: 100vw;
+    border: none;
+
+    background-color: rgba(196, 196, 196, 0.3);
+    display: none;
   }
+
+  &__details[open] {
+    display: grid;
+    place-content: center;
+  }
+
+  /* &:hover {
+    transform: scale(1.05);
+  } */
 
   & img {
     height: 308px;

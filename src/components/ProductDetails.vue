@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { getProduct } from "@/api";
+import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 
 const props = defineProps({
-  productId: {
-    type: Number,
+  product: {
+    type: Object as () => ProductType,
     required: true,
   },
 });
 
-const { title, price, description, image } = await getProduct(props.productId);
 const amout = ref(1);
 
 const minusAmount = () => {
@@ -24,67 +23,60 @@ const plusAmount = () => {
 </script>
 
 <template>
-  <main class="main">
-    <div class="main__wrapper">
-      <div class="main__title">
-        <h1 class="main__name">{{ title }}</h1>
-        <h3 class="main__price">$ {{ price }}</h3>
-      </div>
-      <div class="main__image_warpper">
-        <img class="main__image" :src="image" />
-      </div>
-      <div class="main__info">
-        <div class="main__description">
-          <h4>Description:</h4>
-          <p>
-            {{ description }}
-          </p>
-        </div>
-
-        <form class="add_to_shopping_card" @submit.prevent>
-          <div class="add_to_shopping_card__amount">
-            <input
-              type="button"
-              class="add_to_shopping_card__amount_btn minus"
-              @click="minusAmount"
-            />
-            <output class="add_to_shopping_card__amount_output">{{
-              amout
-            }}</output>
-            <input
-              type="button"
-              class="add_to_shopping_card__amount_btn plus"
-              @click="plusAmount"
-            />
-          </div>
-          <input
-            type="submit"
-            class="add_to_shopping_card__submit"
-            value="Add to cart"
-          />
-        </form>
-      </div>
+  <div class="main">
+    <div class="main__title">
+      <h1 class="main__name">{{ props.product.title }}</h1>
+      <h3 class="main__price">$ {{ props.product.price }}</h3>
     </div>
-  </main>
+    <div class="main__image_warpper">
+      <img class="main__image" :src="props.product.image" />
+    </div>
+    <div class="main__info">
+      <div class="main__description">
+        <h4>Description:</h4>
+        <p>
+          {{ props.product.description }}
+        </p>
+      </div>
+
+      <form class="add_to_shopping_card" @submit.prevent>
+        <div class="add_to_shopping_card__amount">
+          <input
+            type="button"
+            class="add_to_shopping_card__amount_btn minus"
+            @click="minusAmount"
+          />
+          <output class="add_to_shopping_card__amount_output">{{
+            amout
+          }}</output>
+          <input
+            type="button"
+            class="add_to_shopping_card__amount_btn plus"
+            @click="plusAmount"
+          />
+        </div>
+        <input
+          type="submit"
+          class="add_to_shopping_card__submit"
+          value="Add to cart"
+        />
+      </form>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .main {
-  max-width: 1440px;
-  margin: 0 auto;
-  height: 100vh;
-  width: 100vw;
+  position: relative;
+  padding: 40px;
+  height: 80vh;
+  background-color: #fff;
+  z-index: 2;
+  border-radius: 10px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &__wrapper {
-    height: min(100%, 820px);
-    position: relative;
-
-    display: flex;
-  }
 
   &__image_warpper {
     height: 100%;
@@ -96,7 +88,7 @@ const plusAmount = () => {
 
   &__title {
     position: absolute;
-    inset: 0 auto auto 0;
+    inset: 40px auto auto 40px;
     width: 800px;
   }
 
@@ -121,6 +113,7 @@ const plusAmount = () => {
   }
 
   &__info {
+    height: 100%;
     width: 496px;
     padding: 32px 64px;
     display: grid;
