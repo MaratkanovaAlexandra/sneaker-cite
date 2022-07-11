@@ -13,7 +13,7 @@
           </li>
           <li class="contacts__links">
             <p>Support line:</p>
-            <a href="tel:+250 788 467 808">+250 788 467 808</a>
+            <a href="tel:+250788467808">+250 788 467 808</a>
           </li>
         </ul>
       </div>
