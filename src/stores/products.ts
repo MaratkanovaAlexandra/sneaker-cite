@@ -10,7 +10,7 @@ export const useProductsStore = defineStore({
     rate: { min: 0, max: 5 },
     count: { min: 1, max: 1000 },
     category: "",
-    isLoading: false,
+    isLoading: true,
   }),
   getters: {
     isRotating: (state) => state.sort === "desc",

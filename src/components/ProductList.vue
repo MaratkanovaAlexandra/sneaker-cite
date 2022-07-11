@@ -3,6 +3,8 @@ import { useProductsStore } from "@/stores/products";
 import ProductCard from "./ProductCard.vue";
 
 import MainAside from "./MainAside.vue";
+
+import AppFooter from "./AppFooter.vue";
 import AppLoader from "./AppLoader.vue";
 
 const store = useProductsStore();
@@ -29,13 +31,20 @@ defineProps({
         <img src="@/assets/icons/Arrow.svg" alt="Sort" width="24" height="24" />
       </button>
 
-      <TransitionGroup class="progucts__wrapper" tag="div" name="progucts">
+      <TransitionGroup
+        class="progucts__wrapper"
+        v-if="!store.isLoading"
+        tag="div"
+        name="products"
+      >
         <ProductCard
           :product="product"
           v-for="product in store.filterProducts"
           :key="product.id"
         />
       </TransitionGroup>
+      <div v-else class="loading"></div>
+      <AppFooter />
     </section>
 
     <AppLoader />
@@ -53,8 +62,6 @@ defineProps({
   position: relative;
   width: 76.8%;
 
-  margin-bottom: 92px;
-
   &__title {
     padding: 0 64px;
     font-weight: 700;
@@ -69,6 +76,7 @@ defineProps({
     width: 100%;
     gap: 64px 24px;
     flex-wrap: wrap;
+    margin-bottom: 92px;
   }
 
   &__sort {
@@ -85,6 +93,11 @@ defineProps({
   .rotate {
     transform: rotate(540deg);
   }
+}
+
+.loading {
+  height: calc(100vh - 360px);
+  width: 100%;
 }
 
 .progucts-move,
