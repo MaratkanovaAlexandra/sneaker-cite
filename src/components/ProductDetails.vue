@@ -125,7 +125,6 @@ const plusAmount = () => {
     padding: 32px 64px;
     display: grid;
     place-items: center;
-    gap: 530px;
 
     h4 {
       font-weight: 700;
