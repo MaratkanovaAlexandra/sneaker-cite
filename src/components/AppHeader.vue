@@ -7,9 +7,6 @@ import type { NavItemType } from "@/types/NavItem";
 const routes = ref<NavItemType[]>([]);
 const route = useRoute();
 const router = useRouter();
-const showHeader = ref(true);
-
-watch(route, () => (showHeader.value = route.path !== "/product"));
 
 onMounted(async () => {
   routes.value = await getCategories();
@@ -17,7 +14,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <header class="header" v-if="showHeader">
+  <header class="header">
     <div class="header__wrapper">
       <div class="logo" @click="router.push('/')">
         <img
@@ -31,7 +28,7 @@ onMounted(async () => {
       </div>
 
       <nav class="header__nav">
-        <TransitionGroup tag="ul" class="header__nav_list" name="categories">
+        <TransitionGroup tag="ul" class="header__nav_list" name="category">
           <RouterLink
             v-for="routeItem in routes"
             :key="routeItem.url"
@@ -139,19 +136,19 @@ onMounted(async () => {
     line-height: 2.25rem;
   }
 
-  .categories-move,
-  .categories-enter-active,
-  .categories-leave-active {
+  .category-move,
+  .category-enter-active,
+  .category-leave-active {
     transition: all 0.2s ease;
   }
 
-  .categories-enter-from,
-  .categories-leave-to {
+  .category-enter-from,
+  .category-leave-to {
     opacity: 0;
     transform: translateY(-20px);
   }
 
-  .categories-leave-active {
+  .category-leave-active {
     position: absolute;
   }
 }
