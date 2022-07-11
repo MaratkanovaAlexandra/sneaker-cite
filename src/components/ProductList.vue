@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard.vue";
 
 import MainAside from "./MainAside.vue";
 import AppFooter from "./AppFooter.vue";
+import AppLoader from "./AppLoader.vue";
 
 const store = useProductsStore();
 
@@ -38,6 +39,8 @@ defineProps({
       </TransitionGroup>
       <AppFooter />
     </section>
+
+    <AppLoader />
   </main>
 </template>
 

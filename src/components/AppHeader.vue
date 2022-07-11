@@ -27,7 +27,7 @@ onMounted(async () => {
       </div>
 
       <nav class="header__nav">
-        <ul class="header__nav_list">
+        <TransitionGroup tag="ul" class="header__nav_list" name="categories">
           <RouterLink
             v-for="routeItem in routes"
             :key="routeItem.url"
@@ -37,7 +37,7 @@ onMounted(async () => {
           >
             {{ routeItem.text }}
           </RouterLink>
-        </ul>
+        </TransitionGroup>
       </nav>
 
       <nav class="header__nav_btns">
@@ -132,6 +132,22 @@ onMounted(async () => {
     font-weight: 600;
     font-size: 2.25rem;
     line-height: 2.25rem;
+  }
+
+  .categories-move,
+  .categories-enter-active,
+  .categories-leave-active {
+    transition: all 0.2s ease;
+  }
+
+  .categories-enter-from,
+  .categories-leave-to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .categories-leave-active {
+    position: absolute;
   }
 }
 </style>
