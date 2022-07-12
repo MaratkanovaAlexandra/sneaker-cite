@@ -21,7 +21,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ProductList
-    :title="(route.query.category as string).replace('%20', ' ').replace('%27', `''`)"
-  />
+  <ProductList :title="route.query.category as string || 'New arrivals'" />
 </template>
