@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
+import { useProductsStore } from "@/stores/products";
+
+const { setLoadeing } = useProductsStore();
 
 const routes = ref<NavItemType[]>([]);
 const route = useRoute();
@@ -10,6 +13,7 @@ const router = useRouter();
 
 onMounted(async () => {
   routes.value = await getCategories();
+  setLoadeing(false);
 });
 </script>
 
@@ -44,7 +48,10 @@ onMounted(async () => {
       <nav class="header__nav_btns">
         <ul class="header__nav_list">
           <li>
-            <button class="header__nav_btn">
+            <button
+              class="header__nav_btn"
+              @click="router.push('/shopping-cart')"
+            >
               <img
                 src="@/assets/icons/ShoppingCart.svg"
                 alt="Shopping Cart"
@@ -113,7 +120,7 @@ onMounted(async () => {
     padding-bottom: 6px;
 
     cursor: pointer;
-    transition: all 0.2s linear;
+    transition: transform 0.2s linear;
     color: #000000;
   }
   &__nav_item:active {
