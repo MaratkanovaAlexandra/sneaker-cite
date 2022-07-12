@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useProductsStore } from "@/stores/products";
-import ProductCard from "./ProductCard.vue";
-
-import MainAside from "./MainAside.vue";
-
-import AppFooter from "./AppFooter.vue";
-import AppLoader from "./AppLoader.vue";
-import ProductDetails from "./ProductDetails.vue";
-import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
+
+import { useProductsStore } from "@/stores/products";
+import type { ProductType } from "@/types/Product";
+
+import ProductCard from "@/components/ProductCard.vue";
+import MainAside from "@/components/MainAside.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import AppLoader from "@/components/AppLoader.vue";
+import ProductDetails from "@/components/ProductDetails.vue";
 
 const store = useProductsStore();
 

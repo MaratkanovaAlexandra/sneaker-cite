@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useShoppingCardStore } from "@/stores/shoppingCart";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+
+import { useShoppingCardStore } from "@/stores/shoppingCart";
 
 const store = useShoppingCardStore();
 const router = useRouter();

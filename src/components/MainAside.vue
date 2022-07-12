@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
+
 import { useProductsStore } from "@/stores/products";
 import Slider from "@vueform/slider";
-import { storeToRefs } from "pinia";
 
 const store = useProductsStore();
 

@@ -1,4 +1,4 @@
-import type { shoppingCartItemType } from "../types/shoppindCartItem";
+import type { shoppingCartItemType } from "@/types/shoppindCartItem";
 import { defineStore } from "pinia";
 import type { ProductType } from "@/types/Product";
 

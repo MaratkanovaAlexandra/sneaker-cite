@@ -1,4 +1,4 @@
-import type { ProductType } from "./Product";
+import type { ProductType } from "@/types/Product";
 
 export type shoppingCartItemType = {
   id: number;

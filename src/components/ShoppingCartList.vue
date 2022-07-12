@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import AppFooter from "./AppFooter.vue";
-import { useShoppingCardStore } from "@/stores/shoppingCart";
 import { storeToRefs } from "pinia";
-import ShoppingCartItem from "./ShoppingCartItem.vue";
-import ShoppingCartAside from "./ShoppingCartAside.vue";
+
+import AppFooter from "@/components/AppFooter.vue";
+import { useShoppingCardStore } from "@/stores/shoppingCart";
+import ShoppingCartItem from "@/components/ShoppingCartItem.vue";
+import ShoppingCartAside from "@/components/ShoppingCartAside.vue";
 
 const store = useShoppingCardStore();
 const { bougthProducts } = storeToRefs(store);

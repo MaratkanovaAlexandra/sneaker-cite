@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { useShoppingCardStore } from "@/stores/shoppingCart";
-import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
-import ProductCounter from "./ProductCounter.vue";
+
+import type { ProductType } from "@/types/Product";
+import { useShoppingCardStore } from "@/stores/shoppingCart";
+
+import ProductCounter from "@/components/ProductCounter.vue";
 
 const store = useShoppingCardStore();
 const { addToShoppingCard } = store;

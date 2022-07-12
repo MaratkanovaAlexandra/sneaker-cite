@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
+
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
 

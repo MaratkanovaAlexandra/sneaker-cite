@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useProductsStore } from "@/stores/products";
 import { storeToRefs } from "pinia";
+
+import { useProductsStore } from "@/stores/products";
 
 const store = useProductsStore();
 const { isLoading } = storeToRefs(store);

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useShoppingCardStore } from "@/stores/shoppingCart";
-import type { shoppingCartItemType } from "@/types/shoppindCartItem";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-import ProductCounter from "./ProductCounter.vue";
+
+import { useShoppingCardStore } from "@/stores/shoppingCart";
+import type { shoppingCartItemType } from "@/types/shoppindCartItem";
+import ProductCounter from "@/components/ProductCounter.vue";
 
 const store = useShoppingCardStore();
 const { getShortedName, getPriceForProducts } = storeToRefs(store);
