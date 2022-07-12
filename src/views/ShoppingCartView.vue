@@ -1,5 +1,9 @@
+<script lang="ts" setup>
+import ShoppingCartList from "@/components/ShoppingCartList.vue";
+</script>
+
 <template>
-  <h1>This is an shopping cart page</h1>
+  <ShoppingCartList />
 </template>
 
 <style></style>

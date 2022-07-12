@@ -39,7 +39,7 @@ const amount = ref(props.item.amount);
     />
 
     <h4 class="item__price">
-      ${{ (getPriceForProducts(item.product.id) as number).toFixed(2) }}
+      $ {{ (getPriceForProducts(item.product.id) as number).toFixed(2) }}
     </h4>
   </div>
 </template>
@@ -50,7 +50,7 @@ const amount = ref(props.item.amount);
   align-items: center;
   justify-content: space-between;
 
-  max-width: 880px;
+  width: 880px;
   height: 128px;
   padding: 24px 32px;
 
@@ -98,7 +98,7 @@ const amount = ref(props.item.amount);
     font-weight: 700;
     font-size: 1.125rem;
     line-height: 1.625rem;
-    width: 70px;
+    width: 130px;
     text-align: right;
   }
 }

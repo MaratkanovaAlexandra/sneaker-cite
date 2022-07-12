@@ -9,6 +9,7 @@ export const useShoppingCardStore = defineStore({
   id: "shoppingCart",
   state: () => ({
     bougthProducts: [] as shoppingCartItemType[],
+    delivery: 0,
   }),
 
   getters: {
@@ -24,6 +25,12 @@ export const useShoppingCardStore = defineStore({
       const result = state.bougthProducts.find((i) => i.product.id === id);
       if (result) return +result.product.price * result.amount;
     },
+
+    getOrderPrice: (state) =>
+      state.bougthProducts.reduce(
+        (sum, p) => sum + +p.product.price * p.amount,
+        0
+      ),
   },
 
   actions: {
@@ -52,6 +59,11 @@ export const useShoppingCardStore = defineStore({
       const product = this.findProduct(id);
       if (product) product.amount = amount;
       saceToLocalStorage(this.bougthProducts);
+    },
+
+    resetCart() {
+      this.$reset();
+      saceToLocalStorage([]);
     },
   },
 });
