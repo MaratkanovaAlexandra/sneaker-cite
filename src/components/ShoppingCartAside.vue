@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-
 import { useShoppingCardStore } from "@/stores/shoppingCart";
 
 const store = useShoppingCardStore();
@@ -10,7 +9,7 @@ const router = useRouter();
 const { getOrderPrice, delivery } = storeToRefs(store);
 const { resetCart } = store;
 
-const pay = () => {
+const hanglePay = () => {
   router.push("/products");
   resetCart();
 };
@@ -33,7 +32,9 @@ const pay = () => {
 
     <div class="aside__summ">$ {{ getOrderPrice + delivery }}</div>
 
-    <button class="aside__pay_btn" @click="pay">Proceed to checkout</button>
+    <button class="aside__pay_btn" @click="hanglePay">
+      Proceed to checkout
+    </button>
   </aside>
 </template>
 
