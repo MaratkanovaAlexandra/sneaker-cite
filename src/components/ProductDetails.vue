@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
+import ProductCounter from "./ProductCounter.vue";
 
 const props = defineProps({
   show: {
@@ -14,16 +15,6 @@ const props = defineProps({
 });
 
 const amout = ref(1);
-
-const minusAmount = () => {
-  if (amout.value <= 1) return;
-  amout.value -= 1;
-};
-
-const plusAmount = () => {
-  if (amout.value >= 100) return;
-  amout.value += 1;
-};
 </script>
 
 <template>
@@ -46,21 +37,7 @@ const plusAmount = () => {
           </div>
 
           <form class="add_to_shopping_card" @submit.prevent>
-            <div class="add_to_shopping_card__amount">
-              <input
-                type="button"
-                class="add_to_shopping_card__amount_btn minus"
-                @click="minusAmount"
-              />
-              <output class="add_to_shopping_card__amount_output">{{
-                amout
-              }}</output>
-              <input
-                type="button"
-                class="add_to_shopping_card__amount_btn plus"
-                @click="plusAmount"
-              />
-            </div>
+            <ProductCounter v-model="amout" />
             <input
               type="submit"
               class="add_to_shopping_card__submit"
@@ -163,45 +140,6 @@ const plusAmount = () => {
   display: flex;
   align-content: center;
   gap: 32px;
-
-  &__amount {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-
-    &_btn {
-      height: 18px;
-      width: 18px;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-    }
-
-    .plus {
-      background-image: url(@/assets/icons/Plus.svg);
-    }
-
-    .minus {
-      background-image: url(@/assets/icons/Minus.svg);
-    }
-
-    &_output {
-      width: 48px;
-      height: 48px;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
-
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 700;
-
-      display: grid;
-      place-items: center;
-    }
-  }
 
   &__submit {
     width: 135px;
