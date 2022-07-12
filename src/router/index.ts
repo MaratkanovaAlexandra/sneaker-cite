@@ -11,8 +11,7 @@ const router = createRouter({
     {
       path: "/shoping-card",
       name: "shoping-card",
-      // add shoping card
-      component: () => import("@/views/AboutView.vue"),
+      component: () => import("@/views/ShoppingCartView.vue"),
     },
     {
       path: "/products",
