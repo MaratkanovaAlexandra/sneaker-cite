@@ -2,7 +2,7 @@ import type { shoppingCartItemType } from "@/types/shoppindCartItem";
 import { defineStore } from "pinia";
 import type { ProductType } from "@/types/Product";
 
-const saceToLocalStorage = (bougthProducts: shoppingCartItemType[]) =>
+const saveToLocalStorage = (bougthProducts: shoppingCartItemType[]) =>
   localStorage.setItem("shoppingCart", JSON.stringify(bougthProducts));
 
 export const useShoppingCardStore = defineStore({
@@ -43,12 +43,12 @@ export const useShoppingCardStore = defineStore({
           amount: amount,
           product: product,
         });
-      saceToLocalStorage(this.bougthProducts);
+      saveToLocalStorage(this.bougthProducts);
     },
 
     removeFormShoppingCard(id: number) {
       this.bougthProducts = this.bougthProducts.filter((i) => i.id !== id);
-      saceToLocalStorage(this.bougthProducts);
+      saveToLocalStorage(this.bougthProducts);
     },
 
     setBougthProducts(products: shoppingCartItemType[]) {
@@ -58,12 +58,12 @@ export const useShoppingCardStore = defineStore({
     setAmount(id: number, amount: number) {
       const product = this.findProduct(id);
       if (product) product.amount = amount;
-      saceToLocalStorage(this.bougthProducts);
+      saveToLocalStorage(this.bougthProducts);
     },
 
     resetCart() {
       this.$reset();
-      saceToLocalStorage([]);
+      saveToLocalStorage([]);
     },
   },
 });
