@@ -19,7 +19,7 @@ const { bougthProducts } = storeToRefs(store);
           tag="div"
           name="bougthProducts"
           class="cart__list"
-          v-if="bougthProducts.length"
+          v-if="bougthProducts.length > 0"
         >
           <ShoppingCartItem
             :item="product"
