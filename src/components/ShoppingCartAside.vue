@@ -21,12 +21,12 @@ const hanglePay = () => {
 
     <div class="order">
       <div class="order__line">
-        <p class="order__text-grey">Sub total</p>
-        <p class="order__text-black">$ {{ getOrderPrice }}</p>
+        <p class="order__text grey-text">Sub total</p>
+        <p class="order__text black-text">$ {{ getOrderPrice }}</p>
       </div>
       <div class="order__line">
-        <p class="order__text-grey">Delivery fee</p>
-        <p class="order__text-black">$ {{ delivery }}</p>
+        <p class="order__text grey-text">Delivery fee</p>
+        <p class="order__text black-text">$ {{ delivery }}</p>
       </div>
     </div>
 
@@ -85,17 +85,15 @@ const hanglePay = () => {
     margin-bottom: 12px;
   }
 
-  &__text-grey,
-  &__text-black {
+  &__text {
     line-height: 1.5rem;
     font-weight: 700;
   }
-
-  &__text-grey {
+  .grey-text {
     color: rgba(0, 0, 0, 0.65);
   }
 
-  &__text-black {
+  .black-text {
     color: #000;
   }
 }
