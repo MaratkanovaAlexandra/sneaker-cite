@@ -79,7 +79,7 @@ const closeTeleport = () => {
       <Teleport to="#modals">
         <ProductDetails
           :product="(chosen as ProductType)"
-          :show="open"
+          :isShow="open"
           @close="closeTeleport"
         />
       </Teleport>

@@ -10,7 +10,7 @@ const store = useShoppingCardStore();
 const { addToShoppingCard } = store;
 
 const props = defineProps({
-  show: {
+  isShow: {
     type: Boolean,
     required: true,
   },
@@ -37,7 +37,7 @@ const handleSubmit = () => {
 
 <template>
   <Transition name="modal">
-    <div class="teleport" v-if="show" @click.self="handleClose">
+    <div class="teleport" v-if="isShow" @click.self="handleClose">
       <div class="main">
         <div class="main__title">
           <h1 class="main__name">{{ props.product.title }}</h1>
