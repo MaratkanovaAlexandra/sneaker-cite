@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useProductsStore } from "@/stores/products";
-import ProductCard from "./ProductCard.vue";
-
-import MainAside from "./MainAside.vue";
-
-import AppFooter from "./AppFooter.vue";
-import AppLoader from "./AppLoader.vue";
-import ProductDetails from "./ProductDetails.vue";
-import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
+
+import { useProductsStore } from "@/stores/products";
+import type { ProductType } from "@/types/Product";
+
+import ProductCard from "@/components/ProductCard.vue";
+import MainAside from "@/components/MainAside.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import AppLoader from "@/components/AppLoader.vue";
+import ProductDetails from "@/components/ProductDetails.vue";
 
 const store = useProductsStore();
 
@@ -20,7 +20,7 @@ defineProps({
   },
 });
 
-const { isRotating, filterProducts } = storeToRefs(store);
+const { isRotating, filterProducts, isLoading } = storeToRefs(store);
 const { toggleSort } = store;
 
 const chosen = ref<ProductType>({
@@ -60,7 +60,12 @@ const closeTeleport = () => {
         <img src="@/assets/icons/Arrow.svg" alt="Sort" width="24" height="24" />
       </button>
 
-      <TransitionGroup class="progucts__wrapper" tag="div" name="products">
+      <TransitionGroup
+        class="progucts__wrapper"
+        tag="div"
+        name="products"
+        v-if="!isLoading"
+      >
         <ProductCard
           :product="product"
           v-for="product in filterProducts"
@@ -69,10 +74,12 @@ const closeTeleport = () => {
         />
       </TransitionGroup>
 
+      <div class="loading" v-else></div>
+
       <Teleport to="#modals">
         <ProductDetails
           :product="(chosen as ProductType)"
-          :show="open"
+          :isShow="open"
           @close="closeTeleport"
         />
       </Teleport>
@@ -102,6 +109,7 @@ const closeTeleport = () => {
     font-size: 1.5rem;
     line-height: 2rem;
     margin: 32px 0;
+    text-transform: capitalize;
   }
 
   &__wrapper {
@@ -111,7 +119,7 @@ const closeTeleport = () => {
     gap: 64px 24px;
     flex-wrap: wrap;
     margin-bottom: 92px;
-    min-height: calc(100vh - 460px);
+    min-height: calc(100vh - 430px);
   }
 
   &__sort {
@@ -123,6 +131,11 @@ const closeTeleport = () => {
     transition: transform 0.5s ease-in;
     height: 24px;
     width: 24px;
+  }
+
+  .loading {
+    width: 100%;
+    min-height: calc(100vh - 350px);
   }
 
   .rotate {

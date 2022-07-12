@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import AppHeader from "./components/AppHeader.vue";
+import AppHeader from "@/components/AppHeader.vue";
+import { useShoppingCardStore } from "@/stores/shoppingCart";
+
+const { setBougthProducts } = useShoppingCardStore();
+setBougthProducts(JSON.parse(localStorage.getItem("shoppingCart") || "[]"));
 </script>
 
 <template>

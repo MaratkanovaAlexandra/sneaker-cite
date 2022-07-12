@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
+
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
 
@@ -28,7 +29,12 @@ onMounted(async () => {
       </div>
 
       <nav class="header__nav">
-        <TransitionGroup tag="ul" class="header__nav_list" name="category">
+        <TransitionGroup
+          tag="ul"
+          class="header__nav_list"
+          name="category"
+          v-if="routes.length > 0"
+        >
           <RouterLink
             v-for="routeItem in routes"
             :key="routeItem.url"
@@ -39,12 +45,16 @@ onMounted(async () => {
             {{ routeItem.text }}
           </RouterLink>
         </TransitionGroup>
+        <div v-else class="loading"></div>
       </nav>
 
       <nav class="header__nav_btns">
         <ul class="header__nav_list">
           <li>
-            <button class="header__nav_btn">
+            <button
+              class="header__nav_btn"
+              @click="router.push('/shopping-cart')"
+            >
               <img
                 src="@/assets/icons/ShoppingCart.svg"
                 alt="Shopping Cart"
@@ -93,36 +103,61 @@ onMounted(async () => {
     margin: 26px auto 0;
   }
 
-  &__nav_list {
-    display: flex;
-    gap: 2rem;
-  }
+  &__nav {
+    width: max-content;
 
-  &__nav_btn {
-    background-color: transparent;
-    border: none;
-    height: 24px;
-    width: 24px;
-  }
+    &_list {
+      display: flex;
+      gap: 2rem;
+    }
 
-  &__nav_item {
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    text-transform: capitalize;
-    padding-bottom: 6px;
+    &_btn {
+      background-color: transparent;
+      border: none;
+      height: 24px;
+      width: 24px;
+    }
 
-    cursor: pointer;
-    transition: all 0.2s linear;
-    color: #000000;
-  }
-  &__nav_item:active {
-    color: #000000;
+    &_item {
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      text-transform: capitalize;
+      padding-bottom: 6px;
+
+      cursor: pointer;
+      transition: transform 0.2s linear;
+      color: #000000;
+
+      &active {
+        color: #000000;
+      }
+    }
   }
 }
 .active {
   padding-bottom: 3px;
   border-bottom: 3px solid #000000;
+}
+
+.loading {
+  height: 24px;
+  width: 600px;
+  background: linear-gradient(to right, #e2e2e2 25%, #d5d5d5 50%, #e2e2e2 100%);
+  animation-name: gradient-animation;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  /* filter: blur(5px); */
+  border-radius: 8px;
+}
+
+@keyframes gradient-animation {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
 }
 .logo {
   display: flex;

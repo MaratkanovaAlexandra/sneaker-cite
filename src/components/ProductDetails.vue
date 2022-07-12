@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 
+import type { ProductType } from "@/types/Product";
+import { useShoppingCardStore } from "@/stores/shoppingCart";
+
+import ProductCounter from "@/components/ProductCounter.vue";
+
+const store = useShoppingCardStore();
+const { addToShoppingCard } = store;
+
 const props = defineProps({
-  show: {
+  isShow: {
     type: Boolean,
     required: true,
   },
@@ -12,23 +19,25 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["close"]);
 
 const amout = ref(1);
 
-const minusAmount = () => {
-  if (amout.value <= 1) return;
-  amout.value -= 1;
+const handleClose = () => {
+  amout.value = 1;
+  emit("close");
 };
 
-const plusAmount = () => {
-  if (amout.value >= 100) return;
-  amout.value += 1;
+const handleSubmit = () => {
+  if (amout.value === 0) return;
+  addToShoppingCard(props.product, amout.value);
+  close();
 };
 </script>
 
 <template>
   <Transition name="modal">
-    <div class="teleport" v-if="show" @click.self="$emit('close')">
+    <div class="teleport" v-if="isShow" @click.self="handleClose">
       <div class="main">
         <div class="main__title">
           <h1 class="main__name">{{ props.product.title }}</h1>
@@ -46,22 +55,9 @@ const plusAmount = () => {
           </div>
 
           <form class="add_to_shopping_card" @submit.prevent>
-            <div class="add_to_shopping_card__amount">
-              <input
-                type="button"
-                class="add_to_shopping_card__amount_btn minus"
-                @click="minusAmount"
-              />
-              <output class="add_to_shopping_card__amount_output">{{
-                amout
-              }}</output>
-              <input
-                type="button"
-                class="add_to_shopping_card__amount_btn plus"
-                @click="plusAmount"
-              />
-            </div>
+            <ProductCounter v-model="amout" />
             <input
+              @click="handleSubmit"
               type="submit"
               class="add_to_shopping_card__submit"
               value="Add to cart"
@@ -163,45 +159,6 @@ const plusAmount = () => {
   display: flex;
   align-content: center;
   gap: 32px;
-
-  &__amount {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-
-    &_btn {
-      height: 18px;
-      width: 18px;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-    }
-
-    .plus {
-      background-image: url(@/assets/icons/Plus.svg);
-    }
-
-    .minus {
-      background-image: url(@/assets/icons/Minus.svg);
-    }
-
-    &_output {
-      width: 48px;
-      height: 48px;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
-
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 700;
-
-      display: grid;
-      place-items: center;
-    }
-  }
 
   &__submit {
     width: 135px;

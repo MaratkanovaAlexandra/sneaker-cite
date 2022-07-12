@@ -7,16 +7,19 @@ import { useRoute } from "vue-router";
 const store = useProductsStore();
 const route = useRoute();
 
-watch(route, () => {
-  store.setCategory(route.query.category as string);
-  store.getProducts();
+const { setCategory, getProducts } = store;
+
+watch(route, async () => {
+  setCategory(route.query.category as string);
+  await getProducts();
 });
-onMounted(() => {
-  store.setCategory(route.query.category as string);
-  store.getProducts();
+
+onMounted(async () => {
+  setCategory(route.query.category as string);
+  await getProducts();
 });
 </script>
 
 <template>
-  <ProductList :title="`The new arrivals`" />
+  <ProductList :title="route.query.category as string || 'New arrivals'" />
 </template>

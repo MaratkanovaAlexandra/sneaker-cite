@@ -38,6 +38,10 @@ export const useProductsStore = defineStore({
       this.isLoading = false;
     },
 
+    setLoadeing(value: boolean) {
+      this.isLoading = value;
+    },
+
     setCategory(value: string) {
       this.category = value;
     },
