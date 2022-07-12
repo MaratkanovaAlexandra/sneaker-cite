@@ -15,13 +15,20 @@ const { bougthProducts } = storeToRefs(store);
       <section class="cart">
         <h2 class="cart__title">Your shopping cart</h2>
 
-        <TransitionGroup tag="div" name="bougthProducts" class="cart__list">
+        <TransitionGroup
+          tag="div"
+          name="bougthProducts"
+          class="cart__list"
+          v-if="bougthProducts.length"
+        >
           <ShoppingCartItem
             :item="product"
             v-for="product in bougthProducts"
             :key="product.id"
           />
         </TransitionGroup>
+
+        <div v-else class="empty">Nothing is in cart</div>
       </section>
 
       <ShoppingCartAside />
@@ -55,6 +62,15 @@ const { bougthProducts } = storeToRefs(store);
       margin-bottom: 20px;
     }
   }
+}
+
+.empty {
+  min-height: calc(100vh - 390px);
+  width: 880px;
+
+  font-size: 1.3rem;
+  line-height: 2rem;
+  padding: 40px 0 0;
 }
 
 .bougthProducts-move,
