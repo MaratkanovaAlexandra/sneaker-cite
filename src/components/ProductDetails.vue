@@ -23,12 +23,12 @@ const emit = defineEmits(["close"]);
 
 const amout = ref(1);
 
-const close = () => {
+const handleClose = () => {
   amout.value = 1;
   emit("close");
 };
 
-const submit = () => {
+const handleSubmit = () => {
   if (amout.value === 0) return;
   addToShoppingCard(props.product, amout.value);
   close();
@@ -37,7 +37,7 @@ const submit = () => {
 
 <template>
   <Transition name="modal">
-    <div class="teleport" v-if="show" @click.self="close">
+    <div class="teleport" v-if="show" @click.self="handleClose">
       <div class="main">
         <div class="main__title">
           <h1 class="main__name">{{ props.product.title }}</h1>
@@ -57,7 +57,7 @@ const submit = () => {
           <form class="add_to_shopping_card" @submit.prevent>
             <ProductCounter v-model="amout" />
             <input
-              @click="submit"
+              @click="handleSubmit"
               type="submit"
               class="add_to_shopping_card__submit"
               value="Add to cart"
