@@ -105,33 +105,34 @@ onMounted(async () => {
 
   &__nav {
     width: max-content;
-  }
 
-  &__nav_list {
-    display: flex;
-    gap: 2rem;
-  }
+    &_list {
+      display: flex;
+      gap: 2rem;
+    }
 
-  &__nav_btn {
-    background-color: transparent;
-    border: none;
-    height: 24px;
-    width: 24px;
-  }
+    &_btn {
+      background-color: transparent;
+      border: none;
+      height: 24px;
+      width: 24px;
+    }
 
-  &__nav_item {
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    text-transform: capitalize;
-    padding-bottom: 6px;
+    &_item {
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      text-transform: capitalize;
+      padding-bottom: 6px;
 
-    cursor: pointer;
-    transition: transform 0.2s linear;
-    color: #000000;
-  }
-  &__nav_item:active {
-    color: #000000;
+      cursor: pointer;
+      transition: transform 0.2s linear;
+      color: #000000;
+
+      &active {
+        color: #000000;
+      }
+    }
   }
 }
 .active {
