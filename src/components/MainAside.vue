@@ -3,14 +3,15 @@ import { storeToRefs } from "pinia";
 
 import { useProductsStore } from "@/stores/products";
 import Slider from "@vueform/slider";
+import { ref } from "vue";
 
 const store = useProductsStore();
 
 const { rate, count } = storeToRefs(store);
 const { setRate, setCount } = store;
 
-const rateValue = [rate.value.min, rate.value.max];
-const countValue = [count.value.min, count.value.max];
+const rateValue = ref([rate.value.min, rate.value.max]);
+const countValue = ref([count.value.min, count.value.max]);
 </script>
 
 <template>
