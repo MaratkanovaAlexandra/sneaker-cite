@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useShoppingCardStore } from "@/stores/shoppingCart";
 import type { ProductType } from "@/types/Product";
 import { ref } from "vue";
 import ProductCounter from "./ProductCounter.vue";
+
+const store = useShoppingCardStore();
+const { addToShoppingCard } = store;
 
 const props = defineProps({
   show: {
@@ -13,13 +17,25 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["close"]);
 
 const amout = ref(1);
+
+const close = () => {
+  amout.value = 1;
+  emit("close");
+};
+
+const submit = () => {
+  if (amout.value === 0) return;
+  addToShoppingCard(props.product, amout.value);
+  close();
+};
 </script>
 
 <template>
   <Transition name="modal">
-    <div class="teleport" v-if="show" @click.self="$emit('close')">
+    <div class="teleport" v-if="show" @click.self="close">
       <div class="main">
         <div class="main__title">
           <h1 class="main__name">{{ props.product.title }}</h1>
@@ -39,6 +55,7 @@ const amout = ref(1);
           <form class="add_to_shopping_card" @submit.prevent>
             <ProductCounter v-model="amout" />
             <input
+              @click="submit"
               type="submit"
               class="add_to_shopping_card__submit"
               value="Add to cart"
