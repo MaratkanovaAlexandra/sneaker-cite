@@ -31,7 +31,7 @@ const handleClose = () => {
 const handleSubmit = () => {
   if (amout.value === 0) return;
   addToShoppingCard(props.product, amout.value);
-  close();
+  handleClose();
 };
 </script>
 
