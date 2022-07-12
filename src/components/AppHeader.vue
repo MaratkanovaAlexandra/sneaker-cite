@@ -3,9 +3,6 @@ import { onMounted, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { getCategories } from "@/api";
 import type { NavItemType } from "@/types/NavItem";
-import { useProductsStore } from "@/stores/products";
-
-const { setLoadeing } = useProductsStore();
 
 const routes = ref<NavItemType[]>([]);
 const route = useRoute();
@@ -13,7 +10,6 @@ const router = useRouter();
 
 onMounted(async () => {
   routes.value = await getCategories();
-  setLoadeing(false);
 });
 </script>
 
