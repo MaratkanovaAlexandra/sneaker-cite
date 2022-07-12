@@ -28,7 +28,12 @@ onMounted(async () => {
       </div>
 
       <nav class="header__nav">
-        <TransitionGroup tag="ul" class="header__nav_list" name="category">
+        <TransitionGroup
+          tag="ul"
+          class="header__nav_list"
+          name="category"
+          v-if="routes.length > 0"
+        >
           <RouterLink
             v-for="routeItem in routes"
             :key="routeItem.url"
@@ -39,6 +44,7 @@ onMounted(async () => {
             {{ routeItem.text }}
           </RouterLink>
         </TransitionGroup>
+        <div v-else class="loading"></div>
       </nav>
 
       <nav class="header__nav_btns">
@@ -96,6 +102,10 @@ onMounted(async () => {
     margin: 26px auto 0;
   }
 
+  &__nav {
+    width: max-content;
+  }
+
   &__nav_list {
     display: flex;
     gap: 2rem;
@@ -126,6 +136,26 @@ onMounted(async () => {
 .active {
   padding-bottom: 3px;
   border-bottom: 3px solid #000000;
+}
+
+.loading {
+  height: 24px;
+  width: 600px;
+  background: linear-gradient(to right, #e2e2e2 25%, #d5d5d5 50%, #e2e2e2 100%);
+  animation-name: gradient-animation;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  /* filter: blur(5px); */
+  border-radius: 8px;
+}
+
+@keyframes gradient-animation {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
 }
 .logo {
   display: flex;
