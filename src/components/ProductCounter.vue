@@ -11,7 +11,7 @@ const emit = defineEmits(["update:modelValue", "reachZero", "reachHundred"]);
 const count = ref(props.modelValue);
 
 const minusAmount = () => {
-  if (count.value === 0) {
+  if (count.value === 1) {
     emit("reachZero");
     return;
   }
@@ -67,7 +67,7 @@ const plusAmount = () => {
   &__output {
     width: 48px;
     height: 48px;
-    background: #ffffff;
+    background: transparent;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 
